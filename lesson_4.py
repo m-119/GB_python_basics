@@ -20,7 +20,7 @@ parser = createParser()
 a = parser.parse_args(sys.argv[1:])
 print(a.production)
 print(f"ЗП сотрудника = {(a.production * a.tariff) + (a.production * a.tariff) * a.bonus / 100}")
-# python.exe l4.py -production=10 -tariff=20 -bonus=5
+# python.exe lesson_4.py -production=10 -tariff=20 -bonus=5
 
 """
 2. Представлен список чисел. Необходимо вывести элементы исходного списка, значения которых больше предыдущего элемента.
