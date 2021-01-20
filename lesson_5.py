@@ -30,7 +30,7 @@ with open('l5-2.txt', 'r', encoding='utf-8') as f:
 3. Создать текстовый файл (не программно), построчно записать фамилии сотрудников и величину их окладов.
 Определить, кто из сотрудников имеет оклад менее 20 тыс., вывести фамилии этих сотрудников.
 Выполнить подсчет средней величины дохода сотрудников.
-"""
+
 from functools import partial
 from statistics import mean
 
@@ -55,12 +55,35 @@ with open('l5-3.txt', 'r', encoding='utf-8') as f:
     print(list(i[0] for i in filter(partial(salary_filter, sz=20000), empl)))
     print("средняя ЗП:",mean(list(i[1] for i in filter(partial(salary_filter, sz=20000), empl))))
 """
+"""
 4. Создать (не программно) текстовый файл со следующим содержимым: One — 1 Two — 2 Three — 3 Four — 4 Необходимо 
 написать программу, открывающую файл на чтение и считывающую построчно данные. При этом английские числительные 
 должны заменяться на русские. Новый блок строк должен записываться в новый текстовый файл.
 """
+# from googletrans import Translator
+# tr = Translator()
+# with open('l5-4en.txt', 'r', encoding='utf-8') as f_en:
+#     with open('l5-4ru.txt', 'a+', encoding='utf-8') as f_ru:
+#         for ln in f_en:
+#             result = tr.translate(ln, src='en', dest='ru')
+#             # print(result.text)
+#             f_ru.write(ln)
 
-"""
+en_ru = {
+'One':'Один',
+'Two':'Два',
+'Three':'Три',
+'Four':'Четыре',
+'Five':'Пять'}
+
+with open('l5-4en.txt', 'r', encoding='utf-8') as f_en:
+    with open('l5-4ru.txt', 'w+', encoding='utf-8') as f_ru:
+        for ln in f_en:
+            for w in en_ru.keys():
+                ln = ln.replace(w, en_ru[w])
+            f_ru.write(ln)
+
+"""f_ru.write
 5. Создать (программно) текстовый файл, записать в него программно набор чисел, разделенных пробелами.
 Программа должна подсчитывать сумму чисел в файле и выводить ее на экран.
 """
