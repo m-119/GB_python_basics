@@ -13,6 +13,8 @@
 import numpy as np
 
 pass
+
+
 class Matrix:
 
     def __init__(self, mx):
@@ -44,12 +46,13 @@ class Matrix:
             result.append(row)
         return Matrix(result)
 
-mx1 = Matrix([list(int(x) for x in row) for row in np.random.randint(0,100, (5, 5))])
-mx2 = Matrix([list(int(x) for x in row) for row in np.random.randint(0,100, (5, 5))])
 
-print(mx1,"-"*30)
-print(mx2,"-"*30)
-print(mx1+mx2,"-"*30)
+mx1 = Matrix([list(int(x) for x in row) for row in np.random.randint(0, 100, (5, 5))])
+mx2 = Matrix([list(int(x) for x in row) for row in np.random.randint(0, 100, (5, 5))])
+
+print(mx1, "-" * 30)
+print(mx2, "-" * 30)
+print(mx1 + mx2, "-" * 30)
 
 """
 2. Реализовать проект расчета суммарного расхода ткани на производство одежды.
@@ -63,7 +66,53 @@ print(mx1+mx2,"-"*30)
 классы для основных классов проекта, проверить на практике работу декоратора @property.
 """
 
+from abc import ABC, abstractmethod
 
+
+class Сlothes(ABC):
+    def __init__(self, property):
+        self.validate(property)
+
+    def validate(self, property):
+        if not (isinstance(property, float) or isinstance(property, int)):
+            raise ValueError
+        else:
+            return property
+
+    @abstractmethod
+    def get_property(self):
+        pass
+
+    def __add__(self, other):
+        return self.get_property + self.get_property
+
+
+class Coat(Сlothes):
+    def __init__(self, property):
+        self._size = self.validate(property)
+        print(f'Пальто(размер): {self._size}')
+
+    @property
+    def get_property(self):
+        return round(self._size / 6.5 + 0.5, 2)
+
+
+class Suit(Сlothes):
+    def __init__(self, property):
+        self._height = self.validate(property)
+        print(f'Костюма(рост): {self._height}')
+
+    @property
+    def get_property(self):
+        return round(2 * self._height + 0.3, 2)
+
+
+my_coat = Coat(48)
+my_suit = Suit(1.78)
+
+print(f'Расход ткани (Пальто): {my_coat.get_property}')
+print(f'Расход ткани (Костюм): {my_suit.get_property}')
+print(f'Расход ткани (Общий): {my_coat + my_suit}')
 
 """
 3. Реализовать программу работы с органическими клетками. Необходимо создать класс Клетка.
