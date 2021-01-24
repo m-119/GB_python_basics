@@ -287,10 +287,10 @@ print(pc.turn('ahead'))
 Создать экземпляры классов и проверить, что выведет описанный метод для каждого экземпляра.
 """
 print(5, end="---------------------------------\n")
-from abc import abstractmethod
+from abc import ABS, abstractmethod
 
 
-class Stationary:
+class Stationary(ABS):
     def __init__(self, title: str = 'Stationary'):
         self.title = title
 
